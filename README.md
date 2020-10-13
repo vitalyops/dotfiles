@@ -1,2 +1,3 @@
 # dotfiles
-current dotfiles for linux
+
+Dotfiles for i3wm, zsh, rofi, dunst, feh...

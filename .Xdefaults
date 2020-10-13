@@ -1,0 +1,3 @@
+rofi.fullscreen:true
+rofi.theme: ~/.config/i3/rofi.rasi
+

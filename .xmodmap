@@ -1,0 +1,15 @@
+remove mod1 = Alt_L
+remove mod4 = Super_L
+keycode 133 = Alt_L
+keycode 64 = Super_L
+add mod1 = Alt_L  
+add mod4 = Super_L
+keycode 66 = Mode_switch
+keysym h = h H Left
+keysym l = l L Right
+keysym k = k K Up
+keysym j = j J Down
+keysym u = u U Prior
+keysym i = i I Home
+keysym o = o O End
+keysym p = p P Next

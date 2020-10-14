@@ -1,0 +1,13 @@
+#!/usr/bin/zsh
+
+alias crap='sudo $(fc -ln -1)'
+alias nvime="nvim ~/.config/nvim/init.vim"
+alias o="open"
+alias gc="git commit -v -s"
+alias gst="git status --short"
+alias ga="git add"
+alias gd="git diff --minimal"
+alias gl="git log --oneline --decorate --graph"
+alias ls="ls -G"
+alias tf="terraform"
+alias ll="ls -lat"

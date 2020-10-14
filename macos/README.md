@@ -1,45 +1,53 @@
+## macOS tiling window manager + linux meta keys + vim-like keybinds
+
+Inspiration comes from maintaining linux like keybindings (ctrl for meta in macOS apps and also in the terminal) while being able to manage windows as close to i3wm as possible. Another benefit of this workflow is the reduced use of mouse due to vim-like keybinds.  
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/vitaliko/dotfiles/main/macos/screenshots/scrot.png" alt="Yabai Window Manager">
 </p>
 
-## Getting Started
-
 ### Prerequisites
 
-__Disclaimer:__ _Oh My Zsh works best on macOS and Linux._
+This configuration assumes you're using an external keyboard (not Apple) with ctrl, super/win, alt keys, in that order. 
 
-* `git` should be installed
+* `zsh` should be your default shell
+* `karabiner-elements` should be installed, you can do so with `brew cask install karabiner-elements`
+* install `brew cask install kitty` - a dotfile customizable, GPU accelerated terminal emulator. Unfortunatly, iTerm2 doesn't do either. 
+* add brew tap for `yabai` (Window manager) and `skhd` (a keybind deamon) - `brew tap koekeishiya/formulae`
+* `vimium` browser plugin is recommended to maintain vim-like keybinds and further mouse-reduced workflow
 
-### Basic Installation
+### Installation
 
-Oh My Zsh is installed by running one of the following commands in your terminal. You can install this via the command-line with either `curl` or `wget`.
+__Disclaimer: For some of the more advanced features in Yabai, disbaling macOS SIP is required, however, we are not going to be doing that.__
 
-#### via curl
-
-```shell
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-```
-
-#### via wget
+#### Install yabai and skhd
 
 ```shell
-sh -c "$(wget -O- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+brew install yabai
+brew install skhd
 ```
 
-#### Manual inspection
+#### Copy the contents of the dotfiles
 
-It's a good idea to inspect the install script from projects you don't yet know. You can do
-that by downloading the install script first, looking through it so everything looks normal,
-then running it:
+Clone the repo and copy the contents of the macos dir in this repo to your $HOME folder
+
+#### Install yabai and skhd (or compile from git repo) and then start them as services 
 
 ```shell
-curl -Lo install.sh https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
-sh install.sh
+brew install yabai
+brew install skhd
+brew services start yabai
+brew services start skhd
 ```
 
-## Using Oh My Zsh
+Make sure to grant macOS permissions to both when prompted
 
-### Plugins
+#### Additional tweaks in macOS
 
-Oh My Zsh comes with a shitload of plugins to take advantage of. You can take a look in the [plugins](https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins) directory and/or the [wiki](https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins) to see what's currently available.
+
+## Using the workflow
+
+### Keybinds
+
+
 

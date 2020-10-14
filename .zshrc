@@ -98,7 +98,7 @@ antigen apply
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
-
+killall Dock
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform

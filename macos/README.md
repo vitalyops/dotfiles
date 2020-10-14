@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://s3.amazonaws.com/ohmyzsh/oh-my-zsh-logo.png" alt="Oh My Zsh">
+  <img src="https://raw.githubusercontent.com/vitaliko/dotfiles/main/macos/screenshots/scrot.png" alt="Yabai Window Manager">
 </p>
 
 ## Getting Started

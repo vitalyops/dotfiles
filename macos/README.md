@@ -12,7 +12,7 @@ This configuration assumes you're using an external keyboard (not Apple) with ct
 
 * `zsh` should be your default shell
 * `karabiner-elements` should be installed, you can do so with `brew cask install karabiner-elements`
-* install `brew cask install kitty` - a dotfile customizable, GPU accelerated terminal emulator. Unfortunately, iTerm2 doesn't do either. 
+* install `brew cask install kitty` - a dotfile customizable, GPU accelerated terminal emulator with unlimited framrate and low latency. ~~Unfortunately, iTerm2 doesn't do either.~~ iTerm2 can only do 60 FPS.
 * add brew tap for `yabai` (Window manager) and `skhd` (a keybind deamon) - `brew tap koekeishiya/formulae`
 * alfred should be installed to launch applications, I use alt+d for its hotkey
 * `vimium` browser plugin is recommended to maintain vim-like keybinds and further mouse-reduced workflow

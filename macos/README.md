@@ -19,7 +19,7 @@ This configuration assumes you're using an external keyboard (not Apple) with ct
 
 ### Installation
 
-__Disclaimer: For some of the more advanced features in Yabai, disbaling macOS SIP is required, however, we are not going to be doing that.__
+__Disclaimer: For some of the more advanced features in Yabai, disabling macOS SIP is required, however, we are not going to be doing that.__
 
 #### Install yabai and skhd (or compile from git repo)
 

@@ -1,0 +1,21 @@
+{
+	"color_scheme": "Packages/One Dark Material - Theme/schemes/OneDark.tmTheme",
+	"font_face": "Roboto Mono",
+	"font_size": 18,
+	"hardware_acceleration": "opengl",
+	"ignored_packages":
+	[
+		"Six",
+		"Vintage",
+		"Vintageous"
+	],
+	"neovintageous_build_version": 11100,
+	"theme": "One Dark.sublime-theme",
+	"vintageous_use_ctrl_keys": true,
+	"vintageous_use_super_keys": null,
+	"word_wrap": "true",
+    "ui_scale": 1.0,
+    "bold_folder_labels": true,
+    "highlight_modified_tabs": true,
+    "open_files_in_new_window": false,
+}

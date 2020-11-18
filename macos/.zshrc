@@ -13,6 +13,10 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 export PATH=$PATH:$HOME/bin
 export GPG_TTY=$(tty)
 export PATH=$PATH:$HOME/.local/bin
+export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore --files'
+export AWS_SESSION_TTL=12h
+export AWS_ASSUME_ROLE_TTL=12h
+export CLOUDSDK_PYTHON=python2
 
 # zsh theme 
 ZSH_THEME='apple'
@@ -59,7 +63,8 @@ bindkey '[E' beginning-of-line
 bindkey '[F' end-of-line
 
 # Delete word with opt-backspace/opt-delete
-bindkey '^N' backward-kill-word
+#bindkey '^n' backward-kill-word
+#bindkey '^?' backward-kill-word
 bindkey '^U' redo
 #bindkey '[H' kill-word
 #bindkey "^?" backward-delete-char
@@ -67,12 +72,14 @@ bindkey '^U' redo
 # Delete line with cmd-backspace
 bindkey '[I' kill-whole-line
 
+bindkey '^H'      backward-kill-word 
+
 # end and home keys
 #bindkey "^[[1~" beginning-of-line
 #bindkey "^[[4~" end-of-line
 
-#bindkey "^[[A" history-beginning-search-backward-end
-#bindkey "^[[B" history-beginning-search-forward-end
+#bindkey "^[[5~" history-beginning-search-backward-end
+#bindkey "^[[6~" history-beginning-search-forward-end
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPS="--extended"
@@ -121,6 +128,24 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 source $HOME/.aliases
-
+killall Dock
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/$USER/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/$USER/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/$USER/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/$USER/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+#autojump
+
+	[[ -s /Users/$USER/.autojump/etc/profile.d/autojump.sh ]] && source /Users/$USER/.autojump/etc/profile.d/autojump.sh
+
+	autoload -U compinit && compinit -u
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+complete -o nospace -C /Users/$USER/bin/vault vault

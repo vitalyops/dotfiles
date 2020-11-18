@@ -1,0 +1,27 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"3024 Color Scheme",
+		"Atomic Color Scheme",
+		"ayu",
+		"ColorSchemeEditor",
+		"Dark Neon Color Scheme",
+		"Dracula Color Scheme",
+		"ExtendedTabSwitcher",
+		"FileIcons",
+		"FileIcons Mono",
+		"Kubernetes Manifest autocomplete",
+		"Material Theme - Appbar",
+		"NeoVintageous",
+		"One Dark Material - Theme",
+		"Package Control",
+		"SVG Icons",
+		"Terrafmt",
+		"Terraform",
+		"Theme - One Dark"
+	]
+}

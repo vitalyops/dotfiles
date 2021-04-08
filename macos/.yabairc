@@ -40,8 +40,8 @@ yabai -m config left_padding                 0
 yabai -m config right_padding                0
 yabai -m config window_gap                   0
 
-yabai -m config --space 4 layout             float
-yabai -m rule --add app=kitty space=2
+yabai -m config --space 5 layout             float
+#yabai -m rule --add app=kitty space=2
 yabai -m rule --add app=Firefox space=1
 yabai -m rule --add app=Sublime space=3
 

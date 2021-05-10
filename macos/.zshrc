@@ -17,9 +17,11 @@ export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore --files'
 export AWS_SESSION_TTL=12h
 export AWS_ASSUME_ROLE_TTL=12h
 export CLOUDSDK_PYTHON=python2
+export RIPGREP_CONFIG_PATH="/Users/$USER/.ripgreprc"
+export AUTO_LS_COMMANDS=(ls)
 
 # zsh theme 
-ZSH_THEME='apple'
+ZSH_THEME='robbyrussell'
 
 
 # zsh setup
@@ -95,9 +97,6 @@ fpath=($HOME/.zsh/zsh-completions/src $fpath)
 
 # sourced scripts
 source $HOME/.oh-my-zsh/antigen.zsh
-#source $ZSH/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#source $ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-#source $ZSH/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
 
@@ -105,14 +104,14 @@ antigen use oh-my-zsh
 antigen bundle git
 antigen bundle command-not-found
 antigen bundle common-aliases
-# antigen bundle autojump
-# antigen bundle z
-antigen bundle fasd
+antigen bundle autojump
+antigen bundle z
+#antigen bundle fasd
 
 # external plugins
-#antigen bundle unixorn/git-extra-commands
+antigen bundle unixorn/git-extra-commands
 antigen bundle psprint/zsh-navigation-tools
-antigen bundle desyncr/auto-ls
+#antigen bundle desyncr/auto-ls
 #antigen bundle MichaelAquilina/zsh-you-should-use
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-history-substring-search
@@ -126,7 +125,7 @@ antigen apply
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
-
+source $HOME/.config/scripts/z.sh
 source $HOME/.aliases
 killall Dock
 autoload -U +X bashcompinit && bashcompinit
@@ -149,3 +148,4 @@ if [ -f '/Users/$USER/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '
 export PATH="$PATH:$HOME/.rvm/bin"
 
 complete -o nospace -C /Users/$USER/bin/vault vault
+[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)

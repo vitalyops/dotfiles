@@ -3,10 +3,11 @@
 call plug#begin()
 
 " Aesthetics - Main
-Plug 'dracula/vim', { 'commit': '147f389f4275cec4ef43ebc25e2011c57b45cc00' }
+"Plug 'dracula/vim', { 'commit': '147f389f4275cec4ef43ebc25e2011c57b45cc00' }
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'ryanoasis/vim-devicons'
+"Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/seoul256.vim'
@@ -15,6 +16,7 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'nightsense/forgotten'
 Plug 'zaki/zazen'
 Plug 'joshdick/onedark.vim'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'drewtempelmeyer/palenight.vim'
 
 " Aethetics - Additional
@@ -46,6 +48,7 @@ Plug 'vim-scripts/loremipsum'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'metakirby5/codi.vim'
+Plug 'dkarter/bullets.vim'
 
 " Entertainment
 "Plug 'ryanss/vim-hackernews'
@@ -57,11 +60,15 @@ let g:python3_host_prog = expand('~/.config/nvim/env/bin/python')
 
 """ Coloring
 syntax on
-"color dracula
-color onedark
+color dracula
+"color onedark
 "color palenight
+"color onehalfdark
+
+set guifont=DroidSansMono\ Nerd\ Font\ 11
+
 highlight Pmenu guibg=white guifg=black gui=bold
-highlight Comment gui=bold
+highlight Comment gui=none
 highlight Normal gui=none
 highlight NonText guibg=none
 
@@ -83,7 +90,7 @@ set wrap breakindent
 set encoding=utf-8
 set number
 set title
-
+set nofoldenable    " disable folding
 set undolevels=1000	" Number of undo levels
 set backspace=indent,eol,start	" Backspace behaviour
 
@@ -99,7 +106,6 @@ let g:airline_powerline_fonts = 1
 let g:airline_section_z = ' %{strftime("%-I:%M %p")}'
 let g:airline_section_warning = ''
 "let g:airline#extensions#tabline#enabled = 1
-
 " Neovim :Terminal
 tmap <Esc> <C-\><C-n>
 tmap <C-w> <Esc><C-w>
@@ -230,6 +236,7 @@ endif
 " Move among buffers with CTRL
 map <C-J> :bnext<CR>
 map <C-K> :bprev<CR>
+map <C-T> :Files<CR>
 
 let mapleader=","
 nmap <leader>q :NERDTreeToggle<CR>

@@ -3,27 +3,17 @@
 call plug#begin()
 
 " Aesthetics - Main
-"Plug 'dracula/vim', { 'commit': '147f389f4275cec4ef43ebc25e2011c57b45cc00' }
-Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'dracula/vim', { 'commit': '147f389f4275cec4ef43ebc25e2011c57b45cc00' }
+"Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'chriskempson/base16-vim'
+Plug 'norcalli/nvim-colorizer.lua'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 "Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
-Plug 'junegunn/seoul256.vim'
 Plug 'junegunn/vim-journal'
 Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'nightsense/forgotten'
-Plug 'zaki/zazen'
-Plug 'joshdick/onedark.vim'
-Plug 'sonph/onehalf', { 'rtp': 'vim' }
-Plug 'drewtempelmeyer/palenight.vim'
 
-" Aethetics - Additional
-Plug 'nightsense/nemo'
-Plug 'yuttie/hydrangea-vim'
-Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
-Plug 'rhysd/vim-color-spring-night'
 
 " Functionalities
 Plug 'tpope/vim-fugitive'
@@ -41,7 +31,6 @@ Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
-Plug 'chrisbra/Colorizer'
 Plug 'KabbAmine/vCoolor.vim'
 Plug 'heavenshell/vim-pydocstring', { 'do': 'make install' }
 Plug 'vim-scripts/loremipsum'
@@ -56,17 +45,17 @@ Plug 'dkarter/bullets.vim'
 call plug#end()
 
 """ Python3 VirtualEnv
-let g:python3_host_prog = expand('~/.config/nvim/env/bin/python')
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 """ Coloring
 syntax on
 color dracula
-"color onedark
-"color palenight
-"color onehalfdark
+let g:airline_theme='base16_dracula'
+"color base16-unikitty-dark
 
 set guifont=DroidSansMono\ Nerd\ Font\ 11
-
+set termguicolors
+set ttyfast                                 " terminal acceleration
 highlight Pmenu guibg=white guifg=black gui=bold
 highlight Comment gui=none
 highlight Normal gui=none
@@ -185,35 +174,9 @@ function! TrimWhitespace()
     call winrestview(l:save)
 endfunction
 
-" Dracula Mode (Dark)
-function! ColorDracula()
-    let g:airline_theme=''
-    color dracula
-    IndentLinesEnable
-endfunction
 
-" Seoul256 Mode (Dark & Light)
-function! ColorSeoul256()
-    let g:airline_theme='silver'
-    color seoul256
-    IndentLinesDisable
-endfunction
 
-" Forgotten Mode (Light)
-function! ColorForgotten()
-    " Light airline themes: tomorrow, silver, alduin
-    " Light colors: forgotten-light, nemo-light
-    let g:airline_theme='tomorrow'
-    color forgotten-light
-    IndentLinesDisable
-endfunction
-
-" Zazen Mode (Black & White)
-function! ColorZazen()
-    let g:airline_theme='badcat'
-    color zazen
-    IndentLinesEnable
-endfunction
+lua require'colorizer'.setup()
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
@@ -244,10 +207,6 @@ nmap \ <leader>q
 nmap <leader>w :TagbarToggle<CR>
 nmap <leader>ee :Colors<CR>
 nmap <leader>ea :AirlineTheme 
-nmap <leader>e1 :call ColorDracula()<CR>
-nmap <leader>e2 :call ColorSeoul256()<CR>
-nmap <leader>e3 :call ColorForgotten()<CR>
-nmap <leader>e4 :call ColorZazen()<CR>
 nmap <leader>r :so ~/.config/nvim/init.vim<CR>
 nmap <leader>t :call TrimWhitespace()<CR>
 xmap <leader>a gaip*
@@ -259,8 +218,6 @@ nmap <leader>f :Files<CR>
 nmap <leader>h :RainbowParentheses!!<CR>
 nmap <leader>j :set filetype=journal<CR>
 nmap <leader>k :ColorToggle<CR>
-nmap <leader>l :Limelight!!<CR>
-xmap <leader>l :Limelight!!<CR>
 autocmd FileType python nmap <leader>x :0,$!~/.config/nvim/env/bin/python -m yapf<CR>
 "nmap <leader>n :HackerNews best<CR>J
 nmap <silent> <leader><leader> :noh<CR>

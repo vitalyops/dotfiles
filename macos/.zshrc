@@ -14,6 +14,8 @@ export PATH=$PATH:$HOME/bin
 export GPG_TTY=$(tty)
 export PATH=$PATH:$HOME/.local/bin
 export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore --files'
+#export FZF_DEFAULT_COMMAND='fd'
+
 export AWS_SESSION_TTL=12h
 export AWS_ASSUME_ROLE_TTL=12h
 export CLOUDSDK_PYTHON=python2
@@ -132,19 +134,38 @@ autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/$USER/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/$USER/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/vitaly/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/vitaly/Downloads/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/$USER/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/$USER/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/vitaly/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/vitaly/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 
 #autojump
 
-	[[ -s /Users/$USER/.autojump/etc/profile.d/autojump.sh ]] && source /Users/$USER/.autojump/etc/profile.d/autojump.sh
+	[[ -s /Users/vitaly/.autojump/etc/profile.d/autojump.sh ]] && source /Users/vitaly/.autojump/etc/profile.d/autojump.sh
 
 	autoload -U compinit && compinit -u
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
+complete -o nospace -C /Users/vitaly/bin/vault vault
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+
+# colors
+export base00=#111111
+export base01=#303030
+export base02=#353535
+export base03=#4A4A4A
+export base04=#B2CCD6
+export base05=#FFFFFF
+export base06=#EEFFFF
+export base07=#FFFFFF
+export base08=#F07178
+export base09=#F78C6C
+export base0A=#FDF200
+export base0B=#13CA91
+export base0C=#00FECA
+export base0D=#7898FB
+export base0E=#FF2079
+export base0F=#FF5370

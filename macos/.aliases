@@ -16,7 +16,6 @@ alias ll="ls -lat"
 alias atom="atom-nightly"
 alias hz="history | fzf"
 alias k="kubectl"
-alias s="subl"
 #complete -F __start_kubectl k
 alias grep="rg"
 alias vim="nvim"

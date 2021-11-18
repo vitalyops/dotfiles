@@ -53,7 +53,6 @@ setopt share_history
 #bindkey "^[[1~" beginning-of-line
 #bindkey "^[[4~" end-of-line
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # base16-shell 
 BASE16_SHELL="$HOME/.config/base16-shell/"
@@ -64,13 +63,8 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 # fpath
 fpath=($HOME/.zsh/zsh-completions/src $fpath)
 
-# sourced scripts
-source $HOME/.aliases
-source $HOME/.oh-my-zsh/antigen.zsh
-#source $ZSH/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#source $ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-#source $ZSH/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 # Load the oh-my-zsh's library.
+source $HOME/.oh-my-zsh/antigen.zsh
 antigen use oh-my-zsh
 
 # plugins with oh-my-zsh
@@ -79,12 +73,12 @@ antigen bundle command-not-found
 antigen bundle common-aliases
 # antigen bundle autojump
 # antigen bundle z
-antigen bundle fasd
+#antigen bundle fasd
 
 # external plugins
 #antigen bundle unixorn/git-extra-commands
 antigen bundle psprint/zsh-navigation-tools
-antigen bundle desyncr/auto-ls
+#antigen bundle desyncr/auto-ls
 #antigen bundle MichaelAquilina/zsh-you-should-use
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-history-substring-search
@@ -98,7 +92,15 @@ antigen apply
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
-killall Dock
+
+# sourced scripts
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source $HOME/.aliases
+#source $ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source $ZSH/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source $ZSH/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/bin/terraform terraform
+
+

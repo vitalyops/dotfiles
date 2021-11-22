@@ -1,13 +1,24 @@
 #!/usr/bin/zsh
 
-alias fuck='sudo $(fc -ln -1)'
+alias crap='sudo $(fc -ln -1)'
 alias nvime="nvim ~/.config/nvim/init.vim"
-alias o="xdg-open"
+alias o="open"
 alias gc="git commit -v -s"
-alias gst="git status --short"
+alias gco="git checkout"
+alias gst="git status"
 alias ga="git add"
 alias gd="git diff --minimal"
 alias gl="git log --oneline --decorate --graph"
-alias ls="ls --color"
 alias tf="terraform"
-
+#alias tf12="terraform"
+alias ll="ls -lat"
+#alias fz="vim -o `fzf`"
+alias atom="atom-nightly"
+alias hz="history | fzf"
+alias k="kubectl"
+#complete -F __start_kubectl k
+alias grep="rg"
+alias v="nvim"
+alias vimconfig="nvim $HOME/.config/nvim/init.vim"
+alias zshconfig="nvim $HOME/.zshrc"
+alias i3config="nvim $HOME/.config/i3/config"

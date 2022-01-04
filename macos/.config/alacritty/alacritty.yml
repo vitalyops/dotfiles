@@ -1,0 +1,58 @@
+window:
+  padding:
+    x: 2
+    y: 2
+  dynamic_padding: true
+
+  decorations: buttonless
+  startup_mode: windowed
+
+
+import:
+  - ~/.config/alacritty/dracula.yml
+scrolling:
+  # Specifying '0' will disable scrolling.
+  history: 100000
+  # Number of lines the viewport will move for every line scrolled when
+  # scrollback is enabled (history > 0).
+  multiplier: 1
+font:
+  normal:
+    family: "SF Mono"
+    style: Regular
+  bold:
+    family: "SF Mono"
+    style: Bold
+  size: 14.0
+  offset:
+    x: 2
+    y: 4
+  use_thin_strokes: true
+# If `true`, bold text is drawn using the bright color variants.
+draw_bold_text_with_bright_colors: true
+# Base16 Default Dark 256 - alacritty color config
+# Chris Kempson (http://chriskempson.com)
+background_opacity: 1
+selection:
+  # This string contains all characters that are used as separators for
+  # "semantic words" in Alacritty.
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+  # When set to `true`, selected text will be copied to the primary clipboard.
+  save_to_clipboard: true
+# Allow terminal applications to change Alacritty’s window title.
+window.dynamic_title: false
+cursor:
+  style: Block
+  unfocused_hollow: true
+# Live config reload (changes require restart)
+live_config_reload: true
+# Map the keys (British keyboard layout)
+key_bindings:
+  - { key: Key0, mods: Alt, chars: 'º' }
+  - { key: Return, mods: Alt, action: SpawnNewInstance }
+  - { key: C, mods: Control|Shift, action: Copy }
+  - { key: V, mods: Control|Shift, action: Paste }
+  - { key: Q, mods: Alt|Shift, action: Quit }
+  - { key: F, mods: Alt|Shift, action: ToggleSimpleFullscreen }
+  - { key: Minus, mods: Control, action: IncreaseFontSize      }
+  - { key: Equals, mods: Control, action: DecreaseFontSize      }

@@ -15,8 +15,12 @@ alias ll="ls -lat"
 #alias fz="vim -o `fzf`"
 alias atom="atom-nightly"
 alias hz="history | fzf"
-alias k="kubectl"
+alias s="subl"
 #complete -F __start_kubectl k
 alias grep="rg"
 alias vim="nvim"
 alias v="nvim"
+alias nproc="sysctl -n hw.logicalcpu"
+alias cal='gcal --starting-day=1'
+#alias k="kubectl"
+alias k="minikube kubectl"

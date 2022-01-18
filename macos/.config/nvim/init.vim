@@ -1,15 +1,34 @@
 """ Forked from https://github.com/Optixal/neovim-init.vim
 """ Vim-Plug
+" Disable some polyglot packages
+let g:polyglot_disabled = ['latex', 'markdown']
+
 call plug#begin()
 
-""" LSP auto-completion stuff
+""" Back to COC trial
 
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-"Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
+" language support
+Plug 'sheerun/vim-polyglot', {'tag': 'v*'}
+Plug 'towolf/vim-helm'
+Plug 'plasticboy/vim-markdown'
+Plug 'Vimjas/vim-python-pep8-indent'
+"Plug 'bps/vim-textobj-python'
+Plug 'chrisbra/csv.vim'
+
+" completion
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'chrisbra/unicode.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+""" CMP LSP auto-completion stuff
+
+"Plug 'neovim/nvim-lspconfig'
+"Plug 'hrsh7th/cmp-nvim-lsp'
+"Plug 'hrsh7th/cmp-buffer'
+"Plug 'hrsh7th/cmp-path'
+""Plug 'hrsh7th/cmp-cmdline'
+"Plug 'hrsh7th/nvim-cmp'
 
 " For vsnip users.
 "Plug 'hrsh7th/cmp-vsnip'
@@ -20,14 +39,14 @@ Plug 'hrsh7th/nvim-cmp'
 " Plug 'saadparwaiz1/cmp_luasnip'
 
 " For ultisnips users.
-Plug 'SirVer/ultisnips'
-Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+"Plug 'SirVer/ultisnips'
+"Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 
 " For snippy users.
 " Plug 'dcampos/nvim-snippy'
 " Plug 'dcampos/cmp-snippy'
 
-" Aesthetics - Main
+""" Aesthetics - Main
 "Plug 'dracula/vim', { 'commit': '147f389f4275cec4ef43ebc25e2011c57b45cc00' }
 Plug 'dracula/vim', { 'as': 'dracula' }
 "Plug 'Lokaltog/vim-monotone'
@@ -262,70 +281,172 @@ nmap <silent> <leader><leader> :noh<CR>
 :command W w
 :command Q q
 
-""" LSP configuration
-""" Simple
-"""lua require'lspconfig'.pyright.setup{on_attach=require'completion'.on_attach}
+"""" LSP configuration
 
-""" With auto-completion
 
-set completeopt=menu,menuone,noselect
+" default coc settings
+let g:coc_global_extensions = [
+  \   'coc-cmake',
+  \   'coc-conventional',
+  \   'coc-css',
+  \   'coc-diagnostic',
+  \   'coc-dictionary',
+  \   'coc-docker',
+  \   'coc-emoji',
+  \   'coc-fish',
+  \   'coc-git',
+  \   'coc-go',
+  \   'coc-highlight',
+  \   'coc-html',
+  \   'coc-java',
+  \   'coc-json',
+  \   'coc-lists',
+  \   'coc-markdownlint',
+  \   'coc-omni',
+  \   'coc-pyright',
+  \   'coc-sh',
+  \   'coc-sql',
+  \   'coc-svg',
+  \   'coc-swagger',
+  \   'coc-syntax',
+  \   'coc-tag',
+  \   'coc-toml',
+  \   'coc-ultisnips',
+  \   'coc-vimlsp',
+  \   'coc-vimtex',
+  \   'coc-word',
+  \   'coc-xml',
+  \   'coc-yaml',
+  \   'coc-yank',
+  \   'coc-bibtex',
+  \ ]
 
-lua <<EOF
-  -- Setup nvim-cmp.
-  local cmp = require'cmp'
+" UltiSnips settings
+let g:UltiSnipsEditSplit="context"
+let g:UltiSnipsSnippetsDir="~/.config/nvim/UltiSnips"
+let g:UltiSnipsListSnippets="<A-tab>"
 
-  cmp.setup({
-    snippet = {
-      -- REQUIRED - you must specify a snippet engine
-      expand = function(args)
-        -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-        vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-      end,
-    },
-    mapping = {
-      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-      ['<C-e>'] = cmp.mapping({
-        i = cmp.mapping.abort(),
-        c = cmp.mapping.close(),
-      }),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    },
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-      -- { name = 'vsnip' }, -- For vsnip users.
-      -- { name = 'luasnip' }, -- For luasnip users.
-      { name = 'ultisnips' }, -- For ultisnips users.
-      -- { name = 'snippy' }, -- For snippy users.
-    }, {
-      { name = 'buffer' },
-    })
-  })
+" markdown
+let g:markdown_enable_mappings=0
+let g:vim_markdown_frontmatter=1
 
-  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline('/', {
-    sources = {
-      { name = 'buffer' }
-    }
-  })
+" l used by latex
 
-  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline(':', {
-    sources = cmp.config.sources({
-      { name = 'path' }
-    }, {
-      { name = 'cmdline' }
-    })
-  })
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+" l used by latex
 
-  -- Setup lspconfig.
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-  require('lspconfig')['pyright'].setup {
-    capabilities = capabilities
-  }
-EOF
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+map <leader>sh :call <SID>show_documentation()<CR>
+map <leader>sd <Plug>(coc-definition)
+map <leader>sr <Plug>(coc-rename)
+map <leader>sl <Plug>(coc-codelens-action)
+map <leader>ss :<C-u>CocList outline<cr>
+map <leader>sw :<C-u>CocList -I symbols<cr>
+nmap <leader>sf <Plug>(coc-format)
+vmap <leader>sf <Plug>(coc-format-selected)
+map <leader>sa <Plug>(coc-codeaction)
+xmap <leader>sa <Plug>(coc-codeaction-selected)
+map <leader>sq <Plug>(coc-fix-current)
+
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+endfunction
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+map <leader>sh :call <SID>show_documentation()<CR>
+map <leader>sd <Plug>(coc-definition)
+map <leader>sr <Plug>(coc-rename)
+map <leader>sl <Plug>(coc-codelens-action)
+map <leader>ss :<C-u>CocList outline<cr>
+map <leader>sw :<C-u>CocList -I symbols<cr>
+nmap <leader>sf <Plug>(coc-format)
+vmap <leader>sf <Plug>(coc-format-selected)
+map <leader>sa <Plug>(coc-codeaction)
+xmap <leader>sa <Plug>(coc-codeaction-selected)
+map <leader>sq <Plug>(coc-fix-current)
+
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+"""" Simple
+""""lua require'lspconfig'.pyright.setup{on_attach=require'completion'.on_attach}
+"
+"""" With auto-completion
+"
+"set completeopt=menu,menuone,noselect
+"
+"lua <<EOF
+"  -- Setup nvim-cmp.
+"  local cmp = require'cmp'
+"
+"  cmp.setup({
+"    snippet = {
+"      -- REQUIRED - you must specify a snippet engine
+"      expand = function(args)
+"        -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+"        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+"        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+"        vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+"      end,
+"    },
+"    mapping = {
+"      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+"      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+"      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+"      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+"      ['<C-e>'] = cmp.mapping({
+"        i = cmp.mapping.abort(),
+"        c = cmp.mapping.close(),
+"      }),
+"      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+"    },
+"    sources = cmp.config.sources({
+"      { name = 'nvim_lsp' },
+"      -- { name = 'vsnip' }, -- For vsnip users.
+"      -- { name = 'luasnip' }, -- For luasnip users.
+"      { name = 'ultisnips' }, -- For ultisnips users.
+"      -- { name = 'snippy' }, -- For snippy users.
+"    }, {
+"      { name = 'buffer' },
+"    })
+"  })
+"
+"  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+"  cmp.setup.cmdline('/', {
+"    sources = {
+"      { name = 'buffer' }
+"    }
+"  })
+"
+"  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+"  cmp.setup.cmdline(':', {
+"    sources = cmp.config.sources({
+"      { name = 'path' }
+"    }, {
+"      { name = 'cmdline' }
+"    })
+"  })
+"
+"  -- Setup lspconfig.
+"  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+"  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+"  require('lspconfig')['pyright'].setup {
+"    capabilities = capabilities
+"  }
+"EOF

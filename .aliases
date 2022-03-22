@@ -16,9 +16,14 @@ alias ll="ls -lat"
 alias atom="atom-nightly"
 alias hz="history | fzf"
 alias k="kubectl"
+alias mk="minikube kubectl --"
 #complete -F __start_kubectl k
 alias grep="rg"
 alias v="nvim"
+alias vim="nvim"
 alias vimconfig="nvim $HOME/.config/nvim/init.vim"
 alias zshconfig="nvim $HOME/.zshrc"
 alias i3config="nvim $HOME/.config/i3/config"
+alias pacman='pacman --color auto'
+unalias fd
+alias cal="cal -m"

@@ -26,3 +26,4 @@ alias nproc="sysctl -n hw.logicalcpu"
 alias cal='gcal --starting-day=1'
 #alias k="kubectl"
 alias k="minikube kubectl"
+alias fd='fd --type f --hidden --follow --exclude .git'

@@ -346,6 +346,7 @@ for_window [class=TelegramDesktop] focus
 #exec_always --no-startup-id picom -b
 #exec_always --no-startup-id killall picom && picom -b
 exec_always --no-startup-id picom -b --config ~/.config/picom.conf
+exec_always --no-startup-id xcape -e 'Mode_switch=Escape'
 
 #############################################
 # autostart applications/services on login: #

@@ -1,0 +1,29 @@
+#!/usr/bin/zsh
+
+alias crap='sudo $(fc -ln -1)'
+alias nvime="nvim ~/.config/nvim/init.vim"
+alias o="open"
+alias gc="git commit -v -s"
+alias gco="git checkout"
+alias gst="git status"
+alias ga="git add"
+alias gd="git diff --minimal"
+alias gl="git log --oneline --decorate --graph"
+alias tf="terraform"
+alias ll="ls -lat"
+alias la="ls -a"
+alias atom="atom-nightly"
+alias hz="history | fzf"
+alias s="subl"
+alias grep="rg --hidden"
+alias rg="rg --hidden"
+alias vim="nvim"
+alias v="nvim"
+alias nproc="sysctl -n hw.logicalcpu"
+alias cal='gcal --starting-day=1'
+alias k="minikube kubectl"
+alias fd='fd --type f --hidden --follow --exclude .git'
+#alias tf12="terraform"
+#alias k="kubectl"
+#complete -F __start_kubectl k
+#alias fz="vim -o `fzf`"

@@ -1,0 +1,231 @@
+{
+  "dashboard": {
+    "id": null,
+    "uid": null,
+    "title": "Kubernetes Cluster Health",
+    "tags": [
+      "kubernetes",
+      "cluster",
+      "health",
+      "devops"
+    ],
+    "timezone": "browser",
+    "schemaVersion": 38,
+    "version": 1,
+    "refresh": "30s",
+    "panels": [
+      {
+        "id": 13568,
+        "title": "Ready Nodes",
+        "type": "stat",
+        "datasource": "$datasource",
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "targets": [
+          {
+            "expr": "count(kube_node_status_condition{namespace=~\"$namespace\",condition=\"Ready\",status=\"true\"})",
+            "interval": "",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ],
+        "options": {},
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short"
+          },
+          "overrides": []
+        }
+      },
+      {
+        "id": 95648,
+        "title": "Running Pods",
+        "type": "stat",
+        "datasource": "$datasource",
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "targets": [
+          {
+            "expr": "count(kube_pod_status_phase{namespace=~\"$namespace\",phase=\"Running\"})",
+            "interval": "",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ],
+        "options": {},
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short"
+          },
+          "overrides": []
+        }
+      },
+      {
+        "id": 39104,
+        "title": "CPU Usage by Node",
+        "type": "graph",
+        "datasource": "$datasource",
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 8
+        },
+        "targets": [
+          {
+            "expr": "100 - (avg by (instance)(rate(node_cpu_seconds_total{mode=\"idle\"}[5m])) * 100)",
+            "interval": "",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ],
+        "options": {},
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent"
+          },
+          "overrides": []
+        }
+      },
+      {
+        "id": 93152,
+        "title": "Memory Usage by Node",
+        "type": "graph",
+        "datasource": "$datasource",
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        },
+        "targets": [
+          {
+            "expr": "(node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100",
+            "interval": "",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ],
+        "options": {},
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent"
+          },
+          "overrides": []
+        }
+      },
+      {
+        "id": 8704,
+        "title": "CrashLoopBackOff Pods",
+        "type": "stat",
+        "datasource": "$datasource",
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 16
+        },
+        "targets": [
+          {
+            "expr": "count(kube_pod_container_status_waiting_reason{namespace=~\"$namespace\",reason=\"CrashLoopBackOff\"})",
+            "interval": "",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ],
+        "options": {},
+        "fieldConfig": {
+          "defaults": {
+            "unit": "short"
+          },
+          "overrides": []
+        }
+      },
+      {
+        "id": 7936,
+        "title": "Top Pods by CPU Usage",
+        "type": "table",
+        "datasource": "$datasource",
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 16
+        },
+        "targets": [
+          {
+            "expr": "topk(5, rate(container_cpu_usage_seconds_total{container!=\"\"}[5m]))",
+            "interval": "",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ],
+        "options": {},
+        "fieldConfig": {
+          "defaults": {
+            "unit": "none"
+          },
+          "overrides": []
+        }
+      },
+      {
+        "id": 70912,
+        "title": "API Server 5xx Error Rate",
+        "type": "graph",
+        "datasource": "$datasource",
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 0,
+          "y": 24
+        },
+        "targets": [
+          {
+            "expr": "rate(apiserver_request_total{code=~\"5..\"}[5m])",
+            "interval": "",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ],
+        "options": {},
+        "fieldConfig": {
+          "defaults": {
+            "unit": "reqps"
+          },
+          "overrides": []
+        }
+      }
+    ],
+    "templating": {
+      "list": [
+        {
+          "type": "datasource",
+          "name": "datasource",
+          "label": "Data Source",
+          "pluginId": "prometheus",
+          "query": "prometheus"
+        },
+        {
+          "type": "query",
+          "name": "namespace",
+          "label": "Namespace",
+          "datasource": "$datasource",
+          "refresh": 1,
+          "includeAll": true,
+          "multi": true,
+          "query": "label_values(kube_pod_info, namespace)",
+          "sort": 1
+        }
+      ]
+    }
+  },
+  "overwrite": true
+}

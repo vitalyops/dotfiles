@@ -1,3 +1,82 @@
+🟢 Cluster Overview
+
+1. Pod Count (Running / Total)
+
+count(kube_pod_status_phase{phase="Running"}) 
+/
+count(kube_pod_status_phase)
+
+2. Node Count
+
+count(kube_node_info)
+
+3. Cluster CPU Usage %
+
+sum(rate(container_cpu_usage_seconds_total{job="kubelet", image!=""}[5m])) 
+/ 
+sum(machine_cpu_cores)
+
+4. Cluster Memory Usage %
+
+sum(container_memory_working_set_bytes{job="kubelet", image!=""}) 
+/
+sum(machine_memory_bytes)
+
+🟡 Node Health Panels
+
+Node CPU Usage by Node
+
+instance:node_cpu_utilisation:rate5m
+
+Node Memory Usage
+
+100 * (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes))
+
+Node Conditions (Ready Status)
+
+kube_node_status_condition{condition="Ready", status="true"}
+
+🔴 Pod/Deployment Health
+
+CrashLoopBackOffs
+
+kube_pod_container_status_waiting_reason{reason="CrashLoopBackOff"}
+
+Pods Not Ready
+
+kube_pod_status_ready{condition="true"} == 0
+
+Top Failing Pods by Restarts
+
+topk(5, increase(kube_pod_container_status_restarts_total[1h]))
+
+Deployment Replica Mismatch
+
+kube_deployment_spec_replicas - kube_deployment_status_replicas_available
+
+📈 Resource Usage by Namespace or Pod
+
+Top CPU-Consuming Pods
+
+topk(5, rate(container_cpu_usage_seconds_total{image!=""}[5m]))
+
+Top Memory-Consuming Pods
+
+topk(5, container_memory_working_set_bytes{image!=""})
+
+CPU Usage by Namespace
+
+sum(rate(container_cpu_usage_seconds_total{image!=""}[5m])) by (namespace)
+
+🧾 Optional: Kubernetes Events via Logs
+
+If you have Azure Monitor or Loki set up for logs:
+
+    Create a Logs panel using the Azure Monitor > Logs source and query for KubePodInventory, KubeEvents, or ContainerLog.
+
+
+
+
 1. Cluster Overview (Top Row)
 
 A snapshot view for fast triage.

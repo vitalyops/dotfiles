@@ -1,56 +1,9 @@
-{
-  "title": "Grafana Backup Job Runs",
-  "timezone": "browser",
-  "version": 1,
-  "schemaVersion": 38,
-  "refresh": "1m",
-  "panels": [
-    {
-      "type": "barchart",
-      "title": "Grafana Backup Job Results",
-      "id": 1,
-      "gridPos": {
-        "h": 12,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "drawStyle": "bars",
-            "barAlignment": 0,
-            "fillOpacity": 100,
-            "stacking": {
-              "mode": "none"
-            }
-          }
-        },
-        "overrides": []
-      },
-      "options": {
-        "orientation": "vertical",
-        "legend": {
-          "displayMode": "list",
-          "placement": "bottom"
-        },
-        "tooltip": {
-          "mode": "single"
-        },
-        "showValue": "auto"
-      },
-      "targets": [
-        {
-          "expr": "label_replace(kube_job_status_succeeded{job_name=\"grafana-backup-cronjob\", condition=\"true\"}, \"status\", \"succeeded\", \"\", \"\") or label_replace(kube_job_status_failed{job_name=\"grafana-backup-cronjob\", condition=\"true\"}, \"status\", \"failed\", \"\", \"\")",
-          "interval": "",
-          "legendFormat": "{{status}}",
-          "refId": "A"
-        }
-      ]
-    }
-  ],
-  "time": {
-    "from": "now-30d",
-    "to": "now"
-  }
-}
+label_replace(
+  kube_job_status_succeeded{job_name="grafana-backup-cronjob", condition="true"},
+  "status", "succeeded", "", ""
+)
+or
+label_replace(
+  kube_job_status_failed{job_name="grafana-backup-cronjob", condition="true"},
+  "status", "failed", "", ""
+)
